@@ -1,0 +1,11 @@
+FILES[] = 
+  ingredient
+  main
+
+INCLUDES += .
+
+CXXProgram(main, $(FILES))
+
+.DEFAULT: main
+  ./main
+
