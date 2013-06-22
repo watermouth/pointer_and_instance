@@ -13,11 +13,20 @@ class PointerPot {
 private:
   std::vector<Ingredient* > mIngredients; 
   std::string mName;
-  void Release() {
+  void release_old() {
     for(std::vector<Ingredient*>::iterator it = mIngredients.begin();
         it != mIngredients.end(); ++it){
+      cout << "deleting..." << endl;
       delete (*it);
+      cout << "...deleted" << endl;
     } 
+  } 
+  void Release() {
+    for(size_t i=0; i != mIngredients.size(); ++i){
+      cout << "deleting..." << endl;
+      delete mIngredients[i];
+      cout << "...deleted" << endl;
+    }
   } 
 
 public: 
@@ -26,7 +35,8 @@ public:
   }
   ~PointerPot() {
     cout << "PointerPot: d'tor " << mName << endl;
-    Release();
+    // if delete Ingredients here, then original owner deletes those again and error occurs.
+    //Release(); 
   }
   PointerPot(const PointerPot& obj) {
     cout << "PointerPot: copy c'tor " << obj.mName << endl;
@@ -45,7 +55,7 @@ public:
     return *this;
   }
   void SetIngredient(Ingredient &obj) {
-    cout << "PointerPot: SetIngredient " << endl;
+    cout << "PointerPot: SetIngredient " << obj.GetName() << endl;
     mIngredients.push_back(&obj);
   }
   std::vector<Ingredient> GetIngredients() {
@@ -59,7 +69,7 @@ public:
   }
   void RemoveIngredients() {
     cout << "PointerPot: RemoveIngredients" << endl;
-    Release();    
+    //Release();    
     mIngredients.clear();
   }
   void CountIngredients() {

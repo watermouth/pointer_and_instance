@@ -1,11 +1,19 @@
 FILES[] = 
   ingredient
-  main
+
+TEST[] =
+  test_plain_pot
+  test_pointer_in_vector
+  test_pointer_pot
 
 INCLUDES += .
 
-CXXProgram(main, $(FILES))
+CXXProgram($(nth 0, $(TEST)), $(nth 0, $(TEST)) $(FILES))
+CXXProgram($(nth 1, $(TEST)), $(nth 1, $(TEST)) $(FILES))
+CXXProgram($(nth 2, $(TEST)), $(nth 2, $(TEST)) $(FILES))
 
-.DEFAULT: main
-  ./main
+.DEFAULT: $(TEST) 
+  ./$(nth 0, $(TEST)) 
+  ./$(nth 1, $(TEST)) 
+  ./$(nth 2, $(TEST)) 
 
