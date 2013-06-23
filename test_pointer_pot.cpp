@@ -21,7 +21,7 @@ void put_ingredients_in_a_pointer_pot() {
   cout << "clear reversed ingredients" << endl;
   reversed.clear();
  
-  // p.RemoveIngredients();
+  p.RemoveIngredients();
   p.CountIngredients();
 
   cout << endl << "exit this block" << endl;
@@ -32,18 +32,15 @@ void copy_a_pointer_pot() {
   PointerPot p("first");
   Ingredient a("apple"), b("banana");
   p.SetIngredient(a);
-  //p.SetIngredient(b); 
+  p.SetIngredient(b); 
   p.CountIngredients();
-  // error : why banana can't delete or poissiblly doubly deleted?
-  //p.RemoveIngredients();
-  /* 
+  p.RemoveIngredients();
   cout << "--- copy and assignment --- " << endl;
   PointerPot p_copied(p);
   PointerPot p_assigned("second");
   p_assigned = p;
   p_copied.RemoveIngredients();
   p_assigned.RemoveIngredients();
-  */ 
   cout << endl << "exit this block" << endl;
 }
 
