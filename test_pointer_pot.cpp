@@ -44,12 +44,33 @@ void copy_a_pointer_pot() {
   cout << endl << "exit this block" << endl;
 }
 
+void clone_a_pointer_pot() {
+  cout << "start this block" << endl;
+  PointerPot p("vegitabl_pot");
+  Ingredient b("blackberry"),c("carot");
+  p.SetIngredient(b);
+  p.SetIngredient(c); 
+  p.CountIngredients();
+  
+  cout << "--- clone ---" << endl;
+  cout << "   copy c'tor: Does call"
+          " copy c'tor on the following line?" << endl;
+  PointerPot cloned = (p.Clone());
+  cloned.CountIngredients();
+  cout << "   assignment" << endl;
+  PointerPot dummy("dummy");
+  dummy = p.Clone(); 
+  cout << endl << "exit this block" << endl;
+}
+
 int main(int argc, char** argv){
   cout << endl << "***** start main *****" << endl ;
   cout << endl << "*** put_ingredients_in_a_pointer_pot ***" << endl;
   put_ingredients_in_a_pointer_pot();
   cout << endl << "*** copy_a_pointer_pot ***" << endl;
   copy_a_pointer_pot();
+  cout << endl << "*** clone_a_pointer_pot ***" << endl;
+  clone_a_pointer_pot();
   cout << endl << "***** end main *****" << endl << endl;
   return 0;
 }
