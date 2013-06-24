@@ -7,6 +7,7 @@ TEST[] =
   test_pointer_pot
 
 INCLUDES += .
+CXXFLAGS += -g
 
 CXXProgram($(nth 0, $(TEST)), $(nth 0, $(TEST)) $(FILES))
 CXXProgram($(nth 1, $(TEST)), $(nth 1, $(TEST)) $(FILES))

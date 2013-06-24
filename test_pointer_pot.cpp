@@ -46,7 +46,7 @@ void copy_a_pointer_pot() {
 
 void clone_a_pointer_pot() {
   cout << "start this block" << endl;
-  PointerPot p("vegitabl_pot");
+  PointerPot p("vegitable_pot");
   Ingredient b("blackberry"),c("carot");
   p.SetIngredient(b);
   p.SetIngredient(c); 
@@ -57,16 +57,21 @@ void clone_a_pointer_pot() {
           " copy c'tor on the following line?" << endl;
   PointerPot cloned = (p.Clone());
   cloned.CountIngredients();
+  //cloned.RemoveIngredients(); Be sure to release before remove.
+  cloned.Release();
   cout << "   assignment" << endl;
   PointerPot dummy("dummy");
   dummy = p.Clone(); 
+  dummy.Release(); 
   cout << endl << "exit this block" << endl;
 }
 
 int main(int argc, char** argv){
   cout << endl << "***** start main *****" << endl ;
+/*
   cout << endl << "*** put_ingredients_in_a_pointer_pot ***" << endl;
   put_ingredients_in_a_pointer_pot();
+*/
   cout << endl << "*** copy_a_pointer_pot ***" << endl;
   copy_a_pointer_pot();
   cout << endl << "*** clone_a_pointer_pot ***" << endl;
