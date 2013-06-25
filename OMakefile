@@ -5,6 +5,7 @@ TEST[] =
   test_plain_pot
   test_pointer_in_vector
   test_pointer_pot
+  test_shared_pointer_pot
 
 INCLUDES += .
 CXXFLAGS += -g
@@ -12,9 +13,14 @@ CXXFLAGS += -g
 CXXProgram($(nth 0, $(TEST)), $(nth 0, $(TEST)) $(FILES))
 CXXProgram($(nth 1, $(TEST)), $(nth 1, $(TEST)) $(FILES))
 CXXProgram($(nth 2, $(TEST)), $(nth 2, $(TEST)) $(FILES))
+CXXProgram($(nth 3, $(TEST)), $(nth 3, $(TEST)) $(FILES))
 
 .DEFAULT: $(TEST) 
   ./$(nth 0, $(TEST)) 
   ./$(nth 1, $(TEST)) 
   ./$(nth 2, $(TEST)) 
+  ./$(nth 3, $(TEST)) 
+
+#valgrind -v --tool=memcheck --leak-check=yes ./test_pointer_pot
+
 
