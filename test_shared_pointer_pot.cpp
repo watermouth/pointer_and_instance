@@ -61,6 +61,7 @@ void clone_a_shared_pointer_pot() {
   cout << "   assignment" << endl;
   SharedPointerPot dummy("dummy");
   dummy = p.Clone(); 
+  dummy = p.Clone();
   cout << endl << "exit this block" << endl;
 }
 
