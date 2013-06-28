@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 #include "boost/shared_ptr.hpp"
 
 using std::cout;
@@ -15,6 +17,15 @@ class SharedPointerPot {
 private:
   std::vector<shared_ptr<Ingredient> > mIngredients; 
   std::string mName;
+  // if this return type is value, then you are to make 2 instance
+  // for one return value. 
+  static const Ingredient& NewElement(const shared_ptr<Ingredient>& p) {
+    return *p;
+  }
+  static const boost::shared_ptr<Ingredient> NewElementPtr(const shared_ptr<Ingredient>& p) {
+    return boost::shared_ptr<Ingredient>(new Ingredient(*p));
+  }
+
 public: 
   explicit SharedPointerPot(std::string name)
     : mName(name)
@@ -41,11 +52,16 @@ public:
   SharedPointerPot Clone() const {
     cout << "SharedPointerPot: Clone" << endl;
     SharedPointerPot obj(mName); 
+    obj.mIngredients.reserve(mIngredients.size());
+    std::transform(mIngredients.begin(), mIngredients.end(),
+      std::back_inserter(obj.mIngredients), NewElementPtr); 
+/*
     for(size_t i = 0; i != mIngredients.size(); ++i){
       obj.mIngredients.push_back(
         shared_ptr<Ingredient>(new Ingredient(*(mIngredients[i])))
       );
     }
+*/
     return obj;
   }
   void SetIngredient(Ingredient &obj) {
@@ -56,11 +72,15 @@ public:
   }
   std::vector<Ingredient> GetIngredients() {
     cout << "SharedPointerPot: GetIngredients" << endl;
-    std::vector<Ingredient> out(mIngredients.size(),
-      Ingredient("no_name"));
+    std::vector<Ingredient> out;
+    out.reserve(mIngredients.size());
+    std::transform(mIngredients.begin(), mIngredients.end(),
+      std::back_inserter(out), NewElement); 
+/*
     for(size_t i=0; i != mIngredients.size(); ++i){
-      out[i] = *(mIngredients[i]);
+      out.push_back(*mIngredients[i]);
     }
+*/
     return out;
   }
   void RemoveIngredients() {

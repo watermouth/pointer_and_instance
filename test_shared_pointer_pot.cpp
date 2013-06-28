@@ -15,10 +15,10 @@ void put_ingredients_in_a_shared_pointer_pot() {
   p.SetIngredient(b); 
   p.CountIngredients();
   
-  cout << "reversed ingredients" << endl;
+  cout << "get ingredients" << endl;
   vector<Ingredient> reversed = 
     vector<Ingredient>(p.GetIngredients());
-  cout << "clear reversed ingredients" << endl;
+  cout << "clear the ingredients" << endl;
   reversed.clear();
  
   p.RemoveIngredients();
