@@ -1,0 +1,25 @@
+CXXTESTFILES[] =
+  shared_pointer_pot_unittest
+  oven_unittest
+
+LIBS = libgtest ../libMylibrary 
+INCLUDES = ../ 
+
+TEST_PROGRAM = unittest
+CXXProgram($(TEST_PROGRAM), ../ingredient gtest_main $(CXXTESTFILES))
+#CXXProgram($(nth 0, $(CXXTESTFILES)), ../ingredient $(nth 0, $(CXXTESTFILES)) gtest_main )
+#CXXProgram($(nth 1, $(CXXTESTFILES)), ../ingredient $(nth 1, $(CXXTESTFILES)) gtest_main)
+#If you want to test by one command "omake test", then the following line would be helpful
+#instead of an upper line.
+
+#$(CXXProgram add_unittest, gtest_main add_unittest): libmylibrary.dylib
+
+#test: $(CXXTESTFILES)
+#  ./$(nth 0, $(CXXTESTFILES))
+#  ./$(nth 1, $(CXXTESTFILES))
+
+test: $(TEST_PROGRAM)
+  ./$(TEST_PROGRAM)
+
+clean:
+  rm -rf $(filter-proper-targets $(ls R, .))

@@ -2,8 +2,10 @@
 #include "shared_pointer_pot.h"
 #include <iostream>
 #include <string>
+#include <boost/scoped_ptr.hpp>
 
 using namespace std;
+using boost::scoped_ptr;
 
 void put_ingredients_in_a_shared_pointer_pot() {
   cout << "start this block" << endl;
@@ -55,13 +57,13 @@ void clone_a_shared_pointer_pot() {
   cout << "--- clone ---" << endl;
   cout << "   copy c'tor: Does call"
           " copy c'tor on the following line?" << endl;
-  SharedPointerPot cloned = (p.Clone());
-  cloned.CountIngredients();
-  cloned.RemoveIngredients(); // automatically released on this line!
-  cout << "   assignment" << endl;
-  SharedPointerPot dummy("dummy");
-  dummy = p.Clone(); 
-  dummy = p.Clone();
+  scoped_ptr<SharedPointerPot> cloned(p.Clone()); 
+  cloned->CountIngredients();
+  cloned->RemoveIngredients(); // automatically released on this line!
+  cout << "   double call" << endl;
+  scoped_ptr<SharedPointerPot> dummy(new SharedPointerPot("dummy"));
+  dummy.reset(p.Clone()); 
+  dummy.reset(p.Clone()); 
   cout << endl << "exit this block" << endl;
 }
 

@@ -4,4 +4,6 @@
 main
 *.omc
 *.lock
+**/gtest/*
+*.a
 

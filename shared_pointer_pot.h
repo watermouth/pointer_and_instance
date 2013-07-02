@@ -49,20 +49,23 @@ public:
     }
     return *this;
   }
-  SharedPointerPot Clone() const {
+  SharedPointerPot* Clone() const {
     cout << "SharedPointerPot: Clone" << endl;
-    SharedPointerPot obj(mName); 
-    obj.mIngredients.reserve(mIngredients.size());
+    SharedPointerPot *obj = new SharedPointerPot(mName); 
+    obj->mIngredients.reserve(mIngredients.size());
     std::transform(mIngredients.begin(), mIngredients.end(),
-      std::back_inserter(obj.mIngredients), NewElementPtr); 
+      std::back_inserter(obj->mIngredients), NewElementPtr); 
 /*
     for(size_t i = 0; i != mIngredients.size(); ++i){
-      obj.mIngredients.push_back(
+      obj->mIngredients.push_back(
         shared_ptr<Ingredient>(new Ingredient(*(mIngredients[i])))
       );
     }
 */
     return obj;
+  }
+  std::string GetName() const {
+    return mName;
   }
   void SetIngredient(Ingredient &obj) {
     cout << "SharedPointerPot: SetIngredient " << obj.GetName() << endl;
